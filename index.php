@@ -252,10 +252,11 @@
                                     <br>
                                     Newtonian mechanics Problems trying to resolve the conflict" ?>
                                 </p>
-                                <br><br>
+                                <br><br><br>
                                 <div>
-                                    <button type="button" class="btn btn-outline-success fs-4" style="border: none;" onclick="window.location.href='contact.php';">Cliquez pour voir la bio du fondateur <i
-                                            class="bi bi-chevron-right ms-3"></i></button>
+                        <button type="button" class="btn btn-success fs-4" style="border: none;" data-bs-toggle="modal"
+                        data-bs-target="#founderModal">Cliquez pour voir la bio du fondateur <i
+                                class="bi bi-chevron-right ms-3"></i></button>
                                 </div>
                             </div>
                             <div class="col-12 col-md-7 mb-3 order-1 order-md-2" data-aos="zoom-out" data-aos-delay="100">
@@ -277,34 +278,37 @@
                             <?php
                             }
                         ?>
-
-                <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
             </div>
         </div>
     </section>
 
+    <!-- Modal -->
+    <div class="modal fade" id="founderModal" tabindex="-1" aria-labelledby="founderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="founderModalLabel">À propos du fondateur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <?php
+                            
+    $stmt = $pdo->query("SELECT * FROM founder_bio LIMIT 1");
+    $founder = $stmt->fetch(PDO::FETCH_ASSOC);
+                    ?>
+                    <img src="image/<?= $founder['image'] ?? 'man.jpg' ?>" alt="Photo du fondateur" class="rounded-circle mb-3"
+                        style="width: 200px; height: 200px; object-fit: cover;">
+                    <p><?= $founder['description'] ?? "Jean ASSESSI est un entrepreneur passionné qui a fondé ce centre avec pour mission de créer une
+                        communauté dynamique. Avec plus de 10 ans d'expérience dans le domaine, il est connu pour son
+                        engagement envers l'excellence.</p>" ?>
+                        <p><strong>Contact :</strong><?= $bddContentTexts['phone_content']['content_fr'] ?? "+229 90 00 00 00" ?> </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="container-fluid p-5 events" style="background-color: #FFE0E0;">
         <div class="container-lg">
             <span style="display: block; width: 30%; border: 5px solid #E74040;"></span>
