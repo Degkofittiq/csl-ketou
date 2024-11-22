@@ -71,11 +71,11 @@
         <span>Nos Espaces</span></a>
 </li>
 <!-- Nav Item - Charts -->
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link" href="../space_locations/">
         <i class="fas fa-chevron-right"></i>
         <span>Demande de locations</span></a>
-</li>
+</li> -->
 <!-- Nav Item - Charts -->
 <li class="nav-item">
     <a class="nav-link" href="../content_texts/">
