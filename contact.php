@@ -17,13 +17,13 @@
         // Include navigation bar
         include('./includes/header.php') ;    
         
-    // Inclure le fichier PHPMailer
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
+        // Inclure le fichier PHPMailer
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
 
-    require 'vendor/autoload.php';  // Si tu utilises Composer
-    
-    $mail = new PHPMailer(true);  // Créer une instance de PHPMailer
+        require 'vendor/autoload.php';  // Si tu utilises Composer
+        
+        $mail = new PHPMailer(true);  // Créer une instance de PHPMailer
 
         if (!empty($_POST)) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -176,7 +176,7 @@ if (isset($_SESSION['success'])) {
             <br>
             <h2 class="text-center" style="color: #252B42; font-weight: 700;"><?= $bddContentTexts['soupscription_titre']['content_fr'] ?? "Souscrivez pour recevoir <br> nos informations" ?></h2>
             <br>
-            <form action="" method="post">
+            <form action="./includes/contact_form.php" method="post">
                 <div class="row justify-content-md-center">
                     <div class="col-12 col-md-4 mb-3">
                         <input name="name" type="text" class="form-control py-3" placeholder="Name" style="border: 2px solid #CD4631;">
