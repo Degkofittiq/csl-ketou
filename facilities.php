@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <title>HomePage</title>
+    <title>Facilities</title>
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="./facilities.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -33,29 +33,42 @@
     
     <div class="hero">
         <div class="desc2">
-            <h2>Decouvrez nos activites</h2>
+            <h2>
+            <?= $bddContentTexts['facilities_premier_titre']['content_fr'] ?? "Decouvrez nos activites" ?></h2>
         </div>
     </div>
 
 
     <div class="row nax container-fluid">
+    <?php
+// Exemple d'événements
+
+$stmt = $pdo->query("SELECT * FROM activities LIMIT 5");
+$activities = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$useReverse = false; // Variable pour alterner les classes
+
+foreach ($activities as $activity) {
+    // Détermine la classe à utiliser
+    $rowClass = $useReverse ? 'row flex-row-reverse' : 'row';
+    ?>
         <section class="">
-            <div class="row">
+            <div class="<?= $rowClass ?>">
                 <div class="col-12 col-md-7 mb-3 mb-md-0 mx-auto order-2 order-md-1 p-5 align-self-center">
                     <div class="d-flex">
                         <div class="align-self-center">
                             <span class="me-3 mb-3" style="display: block; border-bottom: 2px solid black; width: 4rem;"></span>
                         </div>
                         <div>
-                            <p>What we do</p>
+                            <p><?= $activity['little_title'] ?? "" ?></p>
                         </div>
                     </div>
                     <br>
                     <div class="ms-0 ms-md-5 ps-0 ps-md-4">
-                        <h1 class="" style="font-weight: 800;">Intersport House</h1>
+                        <h1 class="" style="font-weight: 800;"><?= $activity['name'] ?? "" ?></h1>
                         <br>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+                            <?= $activity['description'] ?? "" ?>
                         </p>
                     </div>
                     
@@ -63,42 +76,18 @@
                 <div class="col-12 col-md-5 mb-3 order-1 order-md-2 align-items-stretch" data-aos="zoom-in"
                     data-aos-delay="100">
                     <div class="flex-fill">
-                        <img src="image/woman-working-with-personal-trainer.jpg" alt="" class="img-fluid w-100">
+                        <img src="image/<?= $activity['image'] ?? 'woman-working-with-personal-trainer.jpg' ?>" alt="" class="img-fluid w-100">
                     </div>
                 </div>
             </div>
         </section>
         <br>
+    <?php
+    // Alterner la variable
+    $useReverse = !$useReverse;
+}
+?>
     
-        <section class="">
-            <div class="row flex-row-reverse">
-                <div class="col-12 col-md-7 mb-3 mb-md-0 mx-auto order-2 order-md-1 p-5 align-self-center">
-                    <div class="d-flex">
-                        <div class="align-self-center">
-                            <span class="me-3 mb-3" style="display: block; border-bottom: 2px solid black; width: 4rem;"></span>
-                        </div>
-                        <div>
-                            <p>What we do</p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="ms-0 ms-md-5 ps-0 ps-md-4">
-                        <h1 class="" style="font-weight: 800;">Intersport House</h1>
-                        <br>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
-                        </p>
-                    </div>
-                    
-                </div>
-                <div class="col-12 col-md-5 mb-3 order-1 order-md-2 align-items-stretch" data-aos="zoom-in"
-                    data-aos-delay="100">
-                    <div class="flex-fill">
-                        <img src="image/woman-working-with-personal-trainer.jpg" alt="" class="img-fluid w-100">
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>
 
 
@@ -109,83 +98,42 @@
                 <span style="display: block; width: 15%; border: 5px solid #E74040;"></span>
             </div>
             <br>
-            <h2 class="text-center" style="color: #252B42; font-weight: 700;"> Space renting</h2>
+            <h2 class="text-center" style="color: #252B42; font-weight: 700;"><?= $bddContentTexts['facilities_space_renting_titre']['content_fr'] ?? "Space renting" ?></a> </h2>
             <br>
 
             <div class="row list">
                 <div class="scroll-container">
-    
-    
-                    <div class="scroll-item">
-                        <div class="image-container">
-                            <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                                alt="" class="img-fluid w-100">
-                            <div class="overlay">
-                                <h2>Basket</h2>
-                                <p class="description">Description courte du basket.</p>
+                        <?php                            
+                            $stmt = $pdo->query("SELECT * FROM spaces LIMIT 5");
+                            $spaces = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($spaces as $space) {
+                        ?>
+                        <div class="scroll-item">
+                            <div class="image-container">
+                                <img src="image/<?= $space['images'] ?? '[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg' ?>"
+                                    alt="" class="img-fluid w-100">
+                                <div class="overlay">
+                                    <h2><?= $space['name']?></h2>
+                                    <p class="description"><?= $space['amount']?></p>
+                                </div>
                             </div>
                         </div>
-                    </div> 
-    
-                    <div class="scroll-item">
-                        <div class="image-container">
-                            <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                                alt="" class="img-fluid w-100">
-                            <div class="overlay">
-                                <h2>Basket</h2>
-                                <p class="description">Description courte du basket.</p>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="scroll-item">
-                        <div class="image-container">
-                            <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                                alt="" class="img-fluid w-100">
-                            <div class="overlay">
-                                <h2>Basket</h2>
-                                <p class="description">Description courte du basket.</p>
-                            </div>
-                        </div>
-                    </div>
-    
-    
-                    <div class="scroll-item">
-                        <div class="image-container">
-                            <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                                alt="" class="img-fluid w-100">
-                            <div class="overlay">
-                                <h2>Basket</h2>
-                                <p class="description">Description courte du basket.</p>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="scroll-item">
-                        <div class="image-container">
-                            <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                                alt="" class="img-fluid w-100">
-                            <div class="overlay">
-                                <h2>Basket</h2>
-                                <p class="description">Description courte du basket.</p>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="scroll-item">
-                        <div class="image-container">
-                            <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                                alt="" class="img-fluid w-100">
-                            <div class="overlay">
-                                <h2>Basket</h2>
-                                <p class="description">Description courte du basket.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-            </div>
+                            <br> <br>
+                        <?php
 
+                            }
+                            if (empty($activities)) {
+                                ?>
+
+                                <a class="mt-3" href="#" style="color: #737373; text-decoration: none; font-weight: 600; font-size: 16px;">
+                                    No Activity yet
+                                </a>
+                                <br> <br>
+                            <?php
+                            }
+                        ?>    
+                </div>
+            </div>
         </div>
         <br><br>
     </section>

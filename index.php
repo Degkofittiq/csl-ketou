@@ -33,15 +33,15 @@
         <div class="row position">
             <div class="col-12 col-md-5 mb-3 order-2 order-md-1 align-items-stretch">
                 <br>
-                <h1 class="ccc1" style="font-weight: 800; color: #252B42;">Vivez l'Émotion du Sport et le Plaisir des
-                    Loisirs </h1>
+                <h1 class="ccc1" style="font-weight: 800; color: #252B42;"><?= $bddContentTexts['premier_titre_de_home']['content_fr'] ?? "Vivez l'Émotion du Sport et le Plaisir des
+                    Loisirs" ?> </h1>
 
-                <p class="fs-5 tex">Plongez dans un univers où performance, détente et passion se rencontrent pour
-                    répondre à toutes vos envies sportives et récréatives. </p>
+                <p class="fs-5 tex"><?= $bddContentTexts['premier_sous_titre_de_home']['content_fr'] ?? "Plongez dans un univers où performance, détente et passion se rencontrent pour
+                    répondre à toutes vos envies sportives et récréatives." ?></p>
 
                 <div class="d-flex">
                     <div class="tex">
-                        <button type="button" class="btn btn-success px-3 py-2">Nous rejoindre</button>
+                        <button type="button" class="btn btn-success px-3 py-2"><?= $bddContentTexts['bouton_nous_rejoindre']['content_fr'] ?? "Nous rejoindre" ?></button>
                     </div>
                 </div>
 
@@ -57,20 +57,20 @@
         </div>
         <div class="row tex2">
             <div class="col-6 col-md-3 mb-3 mb-md-0">
-                <h1 class="text-center" style="font-weight: 700; color: #96BB7C;">15K</h1>
-                <p class="text-center" style="color: #252B42;">Happy Customers</p>
+                <h1 class="text-center" style="font-weight: 700; color: #96BB7C;"><?= $bddContentTexts['clients_content_nombre']['content_fr'] ?? "15K" ?></h1>
+                <p class="text-center" style="color: #252B42;"><?= $bddContentTexts['clients_content_texte']['content_fr'] ?? "Happy Customers" ?> </p>
             </div>
             <div class="col-6 col-md-3 mb-3 mb-md-0">
-                <h1 class="text-center" style="font-weight: 700; color: #96BB7C;">150K</h1>
-                <p class="text-center" style="color: #252B42;">Monthly Visitors</p>
+                <h1 class="text-center" style="font-weight: 700; color: #96BB7C;"><?= $bddContentTexts['nombre_visiteurs']['content_fr'] ?? "150K" ?></h1>
+                <p class="text-center" style="color: #252B42;"><?= $bddContentTexts['texte_nombre_visiteurs']['content_fr'] ?? "Monthly Visitors" ?> </p>
             </div>
             <div class="col-6 col-md-3 mb-3 mb-md-0">
-                <h1 class="text-center" style="font-weight: 700; color: #96BB7C;">15</h1>
-                <p class="text-center" style="color: #252B42;">Countries Worldwide</p>
+                <h1 class="text-center" style="font-weight: 700; color: #96BB7C;"><?= $bddContentTexts['nombre_de_pays']['content_fr'] ?? "15" ?></h1>
+                <p class="text-center" style="color: #252B42;"><?= $bddContentTexts['nombre_de_pays_texte']['content_fr'] ?? "Countries Worldwide" ?> </p>
             </div>
             <div class="col-6 col-md-3 mb-3 mb-md-0">
-                <h1 class="text-center" style="font-weight: 700; color: #96BB7C;">100+</h1>
-                <p class="text-center" style="color: #252B42;">Top Partners</p>
+                <h1 class="text-center" style="font-weight: 700; color: #96BB7C;"><?= $bddContentTexts['nombre_de_partenaires']['content_fr'] ?? "100+" ?></h1>
+                <p class="text-center" style="color: #252B42;"><?= $bddContentTexts['texte_de_nombre_de_partenaire']['content_fr'] ?? "Top Partners" ?> </p>
             </div>
         </div>
 
@@ -81,82 +81,44 @@
     <section id="facilities" class="container-fluid p-5" style="background-color: #96bb7c; " data-aos="zoom-in"
         data-aos-delay="100">
 
-        <h2 class="text-center" style="color: #252B42; font-weight: 600;">Decouvrez nos activites</h2>
-        <p class="text-center">
-            Problems trying to resolve the conflict between <br>
-            the two major realms of Classical physics: Newtonian mechanics
+        <h2 class="text-center" style="color: #252B42; font-weight: 600;"><?= $bddContentTexts['titre_section_activites']['content_fr'] ?? "Decouvrez nos activites" ?></h2>
+        <p class="text-center" style="max-width:50% !important; ext-align: justify; margin:auto">
+        <?= $bddContentTexts['sous_titre_section_activites']['content_fr'] ?? "Problems trying to resolve the conflict between <br>
+            the two major realms of Classical physics: Newtonian mechanics" ?>
+            
         </p>
 
         <div class="row list">
             <div class="scroll-container">
+                        <?php
+                            
+                            $stmt = $pdo->query("SELECT * FROM activities");
+                            $activities = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($activities as $activity) {
+                        ?>
+                            <div class="scroll-item">
+                                <div class="image-container">
+                                    <img src="image/<?= $activity['image'] ?? "[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg" ?>"
+                                        alt="" class="img-fluid w-100">
+                                    <div class="overlay">
+                                        <h2><?= $activity['name']?></h2>
+                                        <p class="description"><?= $activity['little_title']?></p>
+                                    </div>
+                                </div>
+                            </div> 
+                        <?php
 
+                            }
+                            if (empty($activities)) {
+                                ?>
 
-                <div class="scroll-item">
-                    <div class="image-container">
-                        <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                            alt="" class="img-fluid w-100">
-                        <div class="overlay">
-                            <h2>Basket</h2>
-                            <p class="description">Description courte du basket.</p>
-                        </div>
-                    </div>
-                </div> 
-
-                <div class="scroll-item">
-                    <div class="image-container">
-                        <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                            alt="" class="img-fluid w-100">
-                        <div class="overlay">
-                            <h2>Basket</h2>
-                            <p class="description">Description courte du basket.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="scroll-item">
-                    <div class="image-container">
-                        <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                            alt="" class="img-fluid w-100">
-                        <div class="overlay">
-                            <h2>Basket</h2>
-                            <p class="description">Description courte du basket.</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="scroll-item">
-                    <div class="image-container">
-                        <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                            alt="" class="img-fluid w-100">
-                        <div class="overlay">
-                            <h2>Basket</h2>
-                            <p class="description">Description courte du basket.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="scroll-item">
-                    <div class="image-container">
-                        <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                            alt="" class="img-fluid w-100">
-                        <div class="overlay">
-                            <h2>Basket</h2>
-                            <p class="description">Description courte du basket.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="scroll-item">
-                    <div class="image-container">
-                        <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                            alt="" class="img-fluid w-100">
-                        <div class="overlay">
-                            <h2>Basket</h2>
-                            <p class="description">Description courte du basket.</p>
-                        </div>
-                    </div>
-                </div>
+                                <a class="mt-3" href="#" style="color: #737373; text-decoration: none; font-weight: 600; font-size: 16px;">
+                                    No Activity yet
+                                </a>
+                                <br> <br>
+                            <?php
+                            }
+                        ?>
             </div>
 
         </div>
@@ -169,32 +131,51 @@
         <div class="container-lg">
 
             <br><br>
-            <div class="row">
-                <div class="col-12 col-md-5 mb-3 order-2 order-md-1 align-self-center mt-5">
-                    <span style="display: block; width: 30%; border: 5px solid #E74040;"></span>
-                    <br><br>
-                    <h2 style="font-weight: 800;">A propos de nous </h2>
-                    <p class="mt-2 fs-5">
-                        Problems trying to resolve the conflict between
-                        the two major realms of Classical physics:
-                        <br>
-                        Newtonian mechanics Problems trying to resolve the conflict between
-                        the two major realms of Classical physics:
-                        <br>
-                        Newtonian mechanics Problems trying to resolve the conflict
-                    </p>
-                    <br><br>
-                    <div>
-                        <button type="button" class="btn btn-outline-success fs-4" style="border: none;" onclick="window.location.href='contact.php';">Cliquez pour voir la bio du fondateur <i
-                                class="bi bi-chevron-right ms-3"></i></button>
-                    </div>
-                </div>
-                <div class="col-12 col-md-7 mb-3 order-1 order-md-2" data-aos="zoom-out" data-aos-delay="100">
-                    <div class="flex-fill">
-                        <img src="image/[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg"
-                            alt="" class="img-fluid w-100">
-                    </div>
-                </div>
+            <div class="row mt-2">
+                        <?php
+                            
+                            $stmt = $pdo->query("SELECT * FROM about_us LIMIT 1");
+                            $aboutus = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($aboutus as $about) {
+                        ?>
+                            <div class="col-12 col-md-5 mb-3 order-2 order-md-1 align-self-center mt-5">
+                                <span style="display: block; width: 30%; border: 5px solid #E74040;"></span>
+                                <br><br>
+                                <h2 style="font-weight: 800;"> <?= $about['name'] ?? "A propos de nous" ?> </h2>
+                                <p class="mt-2 fs-5">
+                                    <?= $about['description'] ?? "Problems trying to resolve the conflict between
+                                    the two major realms of Classical physics:
+                                    <br>
+                                    Newtonian mechanics Problems trying to resolve the conflict between
+                                    the two major realms of Classical physics:
+                                    <br>
+                                    Newtonian mechanics Problems trying to resolve the conflict" ?>
+                                </p>
+                                <br><br>
+                                <div>
+                                    <button type="button" class="btn btn-outline-success fs-4" style="border: none;" onclick="window.location.href='contact.php';">Cliquez pour voir la bio du fondateur <i
+                                            class="bi bi-chevron-right ms-3"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-7 mb-3 order-1 order-md-2" data-aos="zoom-out" data-aos-delay="100">
+                                <div class="flex-fill">
+                                    <img src="image/<?= $about['image'] ?? "[freepicdownloader.com]-men-with-battle-rope-battle-ropes-exercise-fitness-gym-crossfit-concept-gym-sport-rope-training-athlete-workout-normal.jpg" ?>"
+                                        alt="" class="img-fluid w-100">
+                                </div>
+                            </div>
+                        <?php
+
+                            }
+                            if (empty($aboutus)) {
+                                ?>
+
+                                <a class="mt-3" href="#" style="color: #737373; text-decoration: none; font-weight: 600; font-size: 16px;">
+                                    No About text yet
+                                </a>
+                                <br> <br>
+                            <?php
+                            }
+                        ?>
 
                 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -227,134 +208,141 @@
         <div class="container-lg">
             <span style="display: block; width: 30%; border: 5px solid #E74040;"></span>
             <br><br>
-            <h2 style="font-weight: 800;">Programmes et Evenements </h2>
+            <h2 style="font-weight: 800;"><?= $bddContentTexts['titre_pour_la_section_evenement']['content_fr'] ?? "Programmes et Evenements" ?> </h2>
             <p class="mt-2 fs-5">
-                Problems trying to resolve the conflict between
-                the two major realms of Classical physics:
+                <?= $bddContentTexts['description_titre_pour_la_section_evenement']['content_fr'] ?? "Problems trying to resolve the conflict between the two major realms of Classical physics:" ?>
             </p>
 
 
             <div class="row eventi titi">
-                <div class="col-12 col-md-6 mb-3 mb-md-0 mx-auto" style="background-color: #F2C94C; border-radius: 20px; margin: 0 30px !important;">
-                    <div class="p-3 d-flex justify-content-between">
-                        <div>
-                            <h3 style="font-weight: 900;">13</h3>
-                            <p style="font-size: 12px;">apr</p>
-                        </div>
-                        <div class="">
-                            <div class="d-flex" style="justify-content: center;">
+            <?php
+                $stmt = $pdo->query("SELECT * FROM events");
+                $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                if (!empty($events)) {
+                    foreach ($events as $event) {
+                        // Récupérer la date de l'événement
+                        $eventDate = $event['date'];
+                        $date = new DateTime($eventDate);
+
+                        // Extraire le jour et le mois
+                        $day = $date->format('j'); // Jour (ex: 13)
+                        setlocale(LC_TIME, 'fr_FR.UTF-8'); // Activer la locale française
+                        $month = strftime('%B', $date->getTimestamp()); // Mois en français (ex: avril)
+                        ?>
+                        <div class="col-12 col-md-6 mb-3 mb-md-0 mx-auto" style="background-color: #F2C94C; border-radius: 20px; margin: 0 30px !important;">
+                            <div class="p-3 d-flex justify-content-between">
                                 <div>
-                                    <p>Name of event</p>
+                                    <h3 style="font-weight: 900;"><?= $day ?></h3>
+                                    <p style="font-size: 12px;"><?= ucfirst($month) ?></p> <!-- Mois en majuscule initiale -->
                                 </div>
-                                <div class="align-self-center">
-                                    <span class="ms-3 mb-3"
-                                        style="display: block; border-bottom: 2px solid black; width: 4rem;"></span>
+                                <div class="">
+                                    <div class="d-flex" style="justify-content: center;">
+                                        <div>
+                                            <p><?= htmlspecialchars($event['name']) ?></p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <span class="ms-3 mb-3" style="display: block; border-bottom: 2px solid black; width: 4rem;"></span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <p style="font-weight: 800;"><?= htmlspecialchars($event['description']) ?></p>
                                 </div>
                             </div>
-                            <br>
-                            <p style="font-weight: 800;">A day with our wonderful children, A day with our wonderful children, A day with our wonderful children,A day with our wonderful children,, A day with our wonderful children, A day with our wonderful children, A day with our wonderful children A day with our wonderful children A day with our wonderful children</p>
-                        </div>
-                    </div>
-                    <div class="row rowex justify-content-md-center" style="padding: 0 50px;">
-                        <div class="col-12 col-md-4 mb-3 rowexi">
-                            <input type="text" class="form-control py-3" placeholder="Phone">
-                        </div>
-                        <div class="col-12 col-md-4 mb-3 rowexi">
-                            <input type="text" class="form-control py-3" placeholder="Phone">
-                        </div>
-                        <div class="col-12 col-md-4 mb-3 rowexi">
-                            <button class="btn btn-dark w-100 py-3" style="border: 1px solid white; background: #000000;">SOUSCRIRE</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 mb-3 mb-md-0 mx-auto" style="background-color: #F2C94C; border-radius: 20px; margin: 0 30px !important;">
-                    <div class="p-3 d-flex justify-content-between">
-                        <div>
-                            <h3 style="font-weight: 900;">13</h3>
-                            <p style="font-size: 12px;">apr</p>
-                        </div>
-                        <div class="">
-                            <div class="d-flex" style="justify-content: center;">
-                                <div>
-                                    <p>Name of event</p>
+                            <div class="row rowex justify-content-md-center" style="padding: 0 50px;">
+                                <div class="col-12 col-md-4 mb-3 rowexi">
+                                    <input type="text" class="form-control py-3" placeholder="Phone">
                                 </div>
-                                <div class="align-self-center">
-                                    <span class="ms-3 mb-3"
-                                        style="display: block; border-bottom: 2px solid black; width: 4rem;"></span>
+                                <div class="col-12 col-md-4 mb-3 rowexi">
+                                    <input type="text" class="form-control py-3" placeholder="Phone">
+                                </div>
+                                <div class="col-12 col-md-4 mb-3 rowexi">
+                                    <button class="btn btn-dark w-100 py-3" style="border: 1px solid white; background: #000000;">SOUSCRIRE</button>
                                 </div>
                             </div>
-                            <br>
-                            <p style="font-weight: 800;">A day with our wonderful children, A day with our wonderful children, A day with our wonderful children,A day with our wonderful children,, A day with our wonderful children, A day with our wonderful children, A day with our wonderful children A day with our wonderful children A day with our wonderful children</p>
                         </div>
-                    </div>
-                    <div class="row rowex justify-content-md-center" style="padding: 0 50px;">
-                        <div class="col-12 col-md-4 mb-3 rowexi">
-                            <input type="text" class="form-control py-3" placeholder="Phone">
-                        </div>
-                        <div class="col-12 col-md-4 mb-3 rowexi">
-                            <input type="text" class="form-control py-3" placeholder="Phone">
-                        </div>
-                        <div class="col-12 col-md-4 mb-3 rowexi">
-                            <button class="btn btn-dark w-100 py-3" style="border: 1px solid white; background: #000000;">SOUSCRIRE</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 mb-3 mb-md-0 mx-auto" style="background-color: #F2C94C; border-radius: 20px;  margin: 0 30px !important;">
-                    <div class="p-3 d-flex justify-content-between">
-                        <div>
-                            <h3 style="font-weight: 900;">13</h3>
-                            <p style="font-size: 12px;">apr</p>
-                        </div>
-                        <div class="">
-                            <div class="d-flex" style="justify-content: center;">
-                                <div>
-                                    <p>Name of event</p>
-                                </div>
-                                <div class="align-self-center">
-                                    <span class="ms-3 mb-3"
-                                        style="display: block; border-bottom: 2px solid black; width: 4rem;"></span>
-                                </div>
+                        <?php
+                    }
+                } else {
+                    ?>
+                    <div class="col-12 col-md-6 mb-3 mb-md-0 mx-auto" style="background-color: #F2C94C; border-radius: 20px; margin: 0 30px !important;">
+                        <div class="p-3 d-flex justify-content-between">
+                            <div>
+                                <h3 style="font-weight: 900;">#</h3>
+                                <p style="font-size: 12px;">*****</p>
                             </div>
-                            <br>
-                            <p style="font-weight: 800;">A day with our wonderful children, A day with our wonderful children, A day with our wonderful children,A day with our wonderful children,, A day with our wonderful children, A day with our wonderful children, A day with our wonderful children A day with our wonderful children A day with our wonderful children</p>
+                            <div class="">
+                                <div class="d-flex" style="justify-content: center;">
+                                    <div>
+                                        <p>Evenements</p>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <span class="ms-3 mb-3" style="display: block; border-bottom: 2px solid black; width: 4rem;"></span>
+                                    </div>
+                                </div>
+                                <br>
+                                <p style="font-weight: 800;">
+                                    no event yet
+                                </p>
+                            </div>
                         </div>
+                        <!-- <div class="row rowex justify-content-md-center" style="padding: 0 50px;">
+                            <div class="col-12 col-md-4 mb-3 rowexi">
+                                <input type="text" class="form-control py-3" placeholder="Phone">
+                            </div>
+                            <div class="col-12 col-md-4 mb-3 rowexi">
+                                <input type="text" class="form-control py-3" placeholder="Phone">
+                            </div>
+                            <div class="col-12 col-md-4 mb-3 rowexi">
+                                <button class="btn btn-dark w-100 py-3" style="border: 1px solid white; background: #000000;">SOUSCRIRE</button>
+                            </div>
+                        </div> -->
                     </div>
-                    <div class="row rowex justify-content-md-center" style="padding: 0 50px;">
-                        <div class="col-12 col-md-4 mb-3 rowexi">
-                            <input type="text" class="form-control py-3" placeholder="Phone">
-                        </div>
-                        <div class="col-12 col-md-4 mb-3 rowexi">
-                            <input type="text" class="form-control py-3" placeholder="Phone">
-                        </div>
-                        <div class="col-12 col-md-4 mb-3 rowexi">
-                            <button class="btn btn-dark w-100 py-3" style="border: 1px solid white; background: #000000;">SOUSCRIRE</button>
-                        </div>
-                    </div>
-                </div>
+                    <?php
+                }
+                ?>
+
             </div>
 
-            <div class="row eventi">
+            <div class="row eventi" id="section3">
     
                 <div class=" table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">Day</th>
-                                <th scope="col">Opening</th>
-                                <th scope="col">Closing</th>
+                                <th scope="col"><?= $bddContentTexts['horaire_section_titre_jour']['content_fr'] ?? 'Jours'  ?></th>
+                                <th scope="col"><?= $bddContentTexts['horaire_section_titre_ouverture']['content_fr'] ?? 'Ouverture'  ?></th>
+                                <th scope="col"><?= $bddContentTexts['horaire_section_titre_fermeture']['content_fr'] ?? 'Fermeture'  ?></th>
                             </tr>
                         </thead>
                         <tbody>
+                        <?php
+                                                        
+                            // Récupérer tous les horaires de la table hourlies
+                            $stmt = $pdo->prepare("SELECT * FROM hourlies");
+                            $stmt->execute();
+                            $hourlies = $stmt->fetchAll();
+                            foreach ($hourlies as $hourly) {
+                        ?>
+                            <tr>
+                                <td><?= $activity['days'] ?></td>
+                                <td><input type="time" class="form-control" value="<?= $activity['h_open'] ?>"></td>
+                                <td><input type="time" class="form-control" value="<?= $activity['h_close'] ?>"></td>
+                            </tr>
+                        <?php
+
+                            }
+                            if (empty($hourlies)) {
+                                ?>
+
                             <tr>
                                 <td>Monday</td>
                                 <td><input type="time" class="form-control" value="09:00"></td>
                                 <td><input type="time" class="form-control" value="18:00"></td>
                             </tr>
-                            <tr>
-                                <td>Tuesday</td>
-                                <td><input type="time" class="form-control" value="08:00"></td>
-                                <td><input type="time" class="form-control" value="21:00"></td>
-                            </tr>
+                            <?php
+                            }
+                        ?>
                         </tbody>
                     </table>
                 </div>

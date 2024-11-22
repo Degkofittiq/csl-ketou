@@ -12,11 +12,14 @@ session_start();
         die("Erreur de connexion à la base de données : " . $e->getMessage());
     }
 ?>
-<?php
 
-// Vérifiez si la session est active
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header('Location: ../../../Admin/login.php'); // Redirige vers la page de login
-    exit;
+<?php
+// Vérifiez si l'URL actuelle contient '/admin/csl-backend/'
+if (strpos($_SERVER['REQUEST_URI'], '/admin/csl-backend/') !== false) {
+    // Si oui, vérifier l'authentification
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header('Location: ../../../Admin/login.php'); // Redirige vers la page de login
+        exit;
+    }
 }
 ?>

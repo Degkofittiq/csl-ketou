@@ -30,27 +30,27 @@
             <div class="col-12 col-md-5 mb-3 order-2 order-md-1 align-self-center">
                 <span style="display: block; width: 30%; border: 5px solid #E74040;"></span>
                 <br>
-                <h3 style="font-weight: 800;">Contactez-nous </h3>
+                <h3 style="font-weight: 800;"><?= $bddContentTexts['contactez_nous_titre']['content_fr'] ?? "Contactez-nous" ?> </h3>
                 <p class="mt-2" style="font-size: 15px;">
-                    Problems trying to resolve the conflict between 
+                    <?= $bddContentTexts['contactez_nous_description']['content_fr'] ?? "Problems trying to resolve the conflict between 
                     the two major realms of Classical physics: 
                     <br>
                     Newtonian mechanics Problems trying to resolve the conflict between 
                     the two major realms of Classical physics: 
                     <br>
-                    Newtonian mechanics Problems trying to resolve the conflict  
+                    Newtonian mechanics Problems trying to resolve the conflict" ?>  
                 </p>
                 <div class="d-flex flex-column mt-2">
-                    <p class="ms-2" style="font-size: 13px; color: #808080;">Address</p>
-                    <p style="margin-top: -1rem;"><strong>COTONOU BENIN</strong></p>
+                    <p class="ms-2" style="font-size: 13px; color: #808080;"><?= $bddContentTexts['adresse_titre']['content_fr'] ?? "Address" ?></p>
+                    <p style="margin-top: -1rem;"><strong><?= $bddContentTexts['adresse_description']['content_fr'] ?? "COTONOU BENIN" ?></strong></p>
                 </div>
                 <div class="d-flex flex-column mt-2">
-                    <p class="ms-2" style="font-size: 13px; color: #808080;">Phone</p>
-                    <p style="margin-top: -1rem;"><strong>+229 99 99 99 99 </strong></p>
+                    <p class="ms-2" style="font-size: 13px; color: #808080;"><?= $bddContentTexts['phone_titre']['content_fr'] ?? "Phone" ?></p>
+                    <p style="margin-top: -1rem;"><strong><?= $bddContentTexts['phone_content']['content_fr'] ?? "+229 99 99 99 99" ?> </strong></p>
                 </div>
                 <div class="d-flex flex-column mt-2">
-                    <p class="ms-2" style="font-size: 13px; color: #808080;">General Enquiry:</p>
-                    <p style="margin-top: -1rem;"><strong>itti@gmail.com</strong></p>
+                    <p class="ms-2" style="font-size: 13px; color: #808080;"><?= $bddContentTexts['email_titre']['content_fr'] ?? "Email" ?>:</p>
+                    <p style="margin-top: -1rem;"><strong><?= $bddContentTexts['email_description']['content_fr'] ?? "itti@gmail.com" ?></strong></p>
                 </div>
             </div>
             <div class="col-12 col-md-7 mb-3 order-1 order-md-2 ">
@@ -68,7 +68,7 @@
                 <span style="display: block; width: 15%; border: 5px solid #E74040;"></span>
             </div>
             <br>
-            <h2 class="text-center" style="color: #252B42; font-weight: 700;"> Souscrivez pour recevoir <br> nos informations</h2>
+            <h2 class="text-center" style="color: #252B42; font-weight: 700;"><?= $bddContentTexts['soupscription_titre']['content_fr'] ?? "Souscrivez pour recevoir <br> nos informations" ?></h2>
             <br>
             <div class="row justify-content-md-center">
                 <div class="col-12 col-md-4 mb-3">
@@ -84,7 +84,7 @@
                     <input type="text" class="form-control py-3" placeholder="Phone">
                 </div>
                 <div class="col-12 col-md-4 mb-3">
-                    <button class="btn btn-dark w-100 py-3" style="border: 1px solid white; background: #000000;">SOUSCRIRE</button>
+                    <button class="btn btn-dark w-100 py-3" style="border: 1px solid white; background: #000000;"><?= $bddContentTexts['souscrire_a_un_event_bouton_texte']['content_fr'] ?? "SOUSCRIRE" ?></button>
                 </div>
             </div>
         </div>
