@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérifier si les informations correspondent
     if ($username === $correct_username && $password === $correct_password) {
+        $_SESSION['username'] = $username;
         $_SESSION['loggedin'] = true;
         header('Location: ./csl-backend/index.php'); // Rediriger vers la page d'accueil ou autre page protégée
         exit;
