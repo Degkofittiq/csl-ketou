@@ -1,27 +1,29 @@
 <?php
 require '../../../config/database.php';
 
-
-// Créer un nouvel élément dans events
+// Traiter le formulaire d'ajout de réservation
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $date = $_POST['date'];
-    $description = $_POST['description'];
+    $client_name = $_POST['client_name'];
+    $client_num = $_POST['client_num'];
+    $event_id = $_POST['event_id'];
 
-    $stmt = $pdo->prepare("INSERT INTO events (name, date, description) VALUES (?, ?, ?)");
-    $stmt->execute([$name, $date, $description]);
+    // Insérer les données dans la table `event_reservations`
+    $stmt = $pdo->prepare("INSERT INTO event_reservations (client_name, client_num, event_id) VALUES (?, ?, ?)");
+    $stmt->execute([$client_name, $client_num, $event_id]);
 
-    echo "Élément ajouté avec succès.";
+    echo "Réservation ajoutée avec succès.";
 }
 
+// Récupérer la liste des événements pour le dropdown
+$eventsStmt = $pdo->query("SELECT id, name FROM events");
+$events = $eventsStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <?php
-        include('../includes/links.php')
-    ?>
+    <?php include('../includes/links.php'); ?>
 </head>
 
 <body id="page-top">
@@ -30,9 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="wrapper">
 
         <!-- Sidebar -->
-         <?php
-            include('../includes/sidebar.php')
-        ?>
+        <?php include('../includes/sidebar.php'); ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -42,25 +42,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div id="content">
 
                 <!-- Topbar -->
-                 <?php
-                    include('../includes/navbar.php')
-                ?>
+                <?php include('../includes/navbar.php'); ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <!-- DataTales Example -->
+                    <!-- Formulaire pour ajouter une réservation -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Ajouter un nouvel event</h6>
-                            
+                            <h6 class="m-0 font-weight-bold text-primary">Ajouter une nouvelle réservation</h6>
                         </div>
                         <div class="card-body">
-                            <form action="" method="post" class="form my-2"  enctype="multipart/form-data">
-                                <input class="form-control my-2" type="text" name="name" placeholder="Nom" required>
-                                <input class="form-control my-2" type="date" name="date" placeholder="Date" required>
-                                <textarea  class="form-control my-2"  name="description" placeholder="description" required></textarea>
-                                <button  class="btn btn-success"  type="submit">Créer</button>
+                            <form action="" method="post" class="form my-2">
+                                <input class="form-control my-2" type="text" name="client_name" placeholder="Nom du client" required>
+                                <input class="form-control my-2" type="text" name="client_num" placeholder="Numéro de téléphone" required>
+                                
+                                <select class="form-control my-2" name="event_id" required>
+                                    <option value="" disabled selected>Choisir un événement</option>
+                                    <?php foreach ($events as $event): ?>
+                                        <option value="<?= htmlspecialchars($event['id']) ?>">
+                                            <?= htmlspecialchars($event['name']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                                <button class="btn btn-success" type="submit">Créer</button>
                             </form>
                         </div>
                     </div>
@@ -72,9 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- End of Main Content -->
 
             <!-- Footer -->
-             <?php
-                include('../includes/footer.php');
-             ?>
+            <?php include('../includes/footer.php'); ?>
             <!-- End of Footer -->
 
         </div>
@@ -84,13 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="../../#page-top">
+    <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <?php
-        include('../includes/scripts.php');
-    ?>
+    <?php include('../includes/scripts.php'); ?>
 
 </body>
 
