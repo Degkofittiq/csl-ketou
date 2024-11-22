@@ -4,7 +4,7 @@ require '../../../config/database.php';
 
 // Créer un nouvel élément dans content_text_management
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
+    $name = preg_replace('/\s+/', '_', $_POST['name']);
     $content_fr = $_POST['content_fr'];
     $content_en = $_POST['content_en'];
 

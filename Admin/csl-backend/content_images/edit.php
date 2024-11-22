@@ -41,7 +41,7 @@ $uniqueId = $timestamp . '_' . $randomString;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['image']['tmp_name'];
-        $fileName = $_FILES['image']['name'];
+        $fileName = $_POST['name'] . '_' . time();
         $fileType = $_FILES['image']['type'];
 
         // Extraire l'extension du fichier

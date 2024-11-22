@@ -5,7 +5,7 @@ require '../../../config/database.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['image']['tmp_name'];
-        $fileName = $_FILES['image']['name'];
+        $fileName = $_POST['name'] . '_' . time();
         $fileType = $_FILES['image']['type'];
 
         // Déplacer l'image dans le dossier ../../../image/
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="card-body">
                             <form action="" method="post" class="form my-2"  enctype="multipart/form-data">
                                 <input class="form-control my-2" type="text" name="name" placeholder="Nom" required>
-                                <textarea  class="form-control my-2"  name="description" placeholder="Description" required></textarea>
+                                <!-- <textarea  class="form-control my-2"  name="description" placeholder="Description" required></textarea> -->
                                 <input  class="form-control my-2"  type="file" accept="images/" name="image" placeholder="Image" required>
                                 <button  class="btn btn-success"  type="submit">Créer</button>
                             </form>
