@@ -52,7 +52,7 @@ $aboutUs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <tr>
                                             <th>#</th>
                                             <th>Noms</th>
-                                            <th>Descriptions</th>
+                                            <!-- <th>Descriptions</th> -->
                                             <th>Images</th>
                                             <th>Actions</th>
                                         </tr>
