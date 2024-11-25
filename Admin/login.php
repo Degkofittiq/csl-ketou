@@ -1,26 +1,51 @@
 <?php
-session_start();
+// session_start();
+
+require('../config/database.php');
+
 
 // Définir les informations de connexion
-$correct_username = 'admincsl@gmail.com'; // Changez cela en fonction de vos besoins
-$correct_password = 'Pa$$w0rd!'; // Changez cela en fonction de vos besoins
+// $correct_username = 'admincsl@gmail.com'; // Changez cela en fonction de vos besoins
+// $correct_password = 'Pa$$w0rd!'; // Changez cela en fonction de vos besoins
 
 // Vérifier si le formulaire a été soumis
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer les informations soumises
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Vérifier si les informations correspondent
-    if ($username === $correct_username && $password === $correct_password) {
-        $_SESSION['username'] = $username;
-        $_SESSION['loggedin'] = true;
-        header('Location: ./csl-backend/index.php'); // Rediriger vers la page d'accueil ou autre page protégée
-        exit;
-    } else {
-        $error = "Nom d'utilisateur ou mot de passe incorrect.";
+        // Récupérer les informations soumises
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+
+        // Valider les données utilisateur
+        if (empty($username) || empty($password)) {
+            echo "Veuillez remplir tous les champs.";
+            exit;
+        }
+
+        try {
+            // Préparer et exécuter la requête SQL
+            $sql = "SELECT username, password FROM users WHERE username = :username";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Vérifier si l'utilisateur existe
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($user && $password == $user['password']) {
+                // Démarrer la session et définir les variables de session
+                session_start();
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['loggedin'] = true;
+
+                // Rediriger vers la page protégée
+                header('Location: ./csl-backend/index.php');
+                exit;
+            } else {
+                 $_SESSION['error'] = "Nom d'utilisateur ou mot de passe incorrect.";
+            }
+        } catch (PDOException $e) {
+            $_SESSION['error'] =  $e->getMessage();
+        }
     }
-}
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>CSL - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -58,6 +83,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-12">
+                                <?php
+                                    if (isset($_SESSION['error'])) {
+                                        ?>
+                                            <div class="alert alert-danger">
+                                                <?=
+                                                    $_SESSION['error'];
+                                                    unset($_SESSION['error']);
+                                                ?>
+                                            </div>
+                                        <?php
+                                    }
+                                ?>
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenue !</h1>
