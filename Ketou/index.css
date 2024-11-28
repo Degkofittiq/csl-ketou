@@ -1,0 +1,212 @@
+*{
+    font-family: "Montserrat", sans-serif;
+}
+
+.container-lg {
+    max-width: 1000px; /* Limite la largeur à 1140px sur grands écrans */
+}
+
+@media (min-width: 1600px) {
+    .container-lg {
+        max-width: 1440px; /* Augmente la largeur maximale sur très grands écrans */
+    }
+}
+.navbar>.container, .navbar>.container-fluid, .navbar>.container-lg, .navbar>.container-md, .navbar>.container-sm, .navbar>.container-xl, .navbar>.container-xxl {
+    flex-wrap: nowrap;
+}
+.nav-link{
+    text-align: justify;
+}
+/*  */
+.pos{
+    position: absolute;
+    top: 40%;
+    left: 10%;  
+}
+
+/* Carousel Styling */
+.carousel {
+    position: relative;
+}
+
+/* Custom Indicators Styling */
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 47rem;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.carousel-indicators .custom-indicator {
+    width: 10px;
+    height: 10px;
+    border: 2px solid #fff;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-indicators .custom-indicator.active {
+    background-color: #fff;
+    transform: scale(1.2);
+}
+
+.carousel-indicators .custom-indicator:hover {
+    background-color: #aaa;
+}
+.relative{
+    position: relative;
+}
+.ppos{
+    position: absolute;
+    top: 12rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.carousel {
+    position: relative;
+}
+
+/* Custom Indicators */
+.carousel-indicator2 {
+    position: absolute;
+    top: 27rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.carousel-indicator2 button {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.carousel-indicator2 .indicator2.active {
+    background-color: #61BC45;
+    border: 2px solid #61BC45;
+    transform: scale(1.2);
+}
+
+
+.carousel-indicator2 button:hover {
+    background-color: #bbb;
+}
+
+.pop, .pop1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ccc;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.pop {
+    left: -3rem;
+}
+
+.pop1 {
+    right: -3rem;
+}
+
+.pop i, .pop1 i {
+    font-size: 1.5rem;
+    color: #4A4A4A;
+}
+
+.hero {
+    background-image: url('images/8.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.hero1{
+    background-image: url('images/9.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.carousel-indicator1 button {
+    width: 12px;
+    height: 12px;
+    /* background-color: #464646; */
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.search-section {
+    padding: 20px;
+    
+    border-radius: 8px;
+  }
+
+  .search-tabs {
+    display: flex;
+    /* justify-content: center; */
+    /* margin-bottom: 20px; */
+    list-style: none;
+    padding: 0;
+    background-color: transparent;
+    border-bottom: 1px solid white;
+  }
+
+  .search-item {
+    margin-right: 10px;
+  }
+
+  .search-link {
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .search-link.active {
+    border-bottom: 2px solid white;
+    color: white;
+    width: 100%;
+  }
+
+  .search-link:hover {
+    border-bottom: 2px solid white;
+    color: white;
+  }
+
+  .search-content {
+    background-color: transparent;
+    padding: 1rem;
+  }
+
+  .form{
+    border: 1.5px solid black;
+    border-radius: 0;
+  }
+  .pot{
+    position: absolute;
+    top: -2rem;
+    right: 7rem;
+  }
