@@ -26,109 +26,108 @@
         
         $mail = new PHPMailer(true);  // Créer une instance de PHPMailer
     
-            if (!empty($_POST)) {
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    // client_name-email-subject-phone-message
-                    // var_dump($_POST);
-                    $client_name = $_POST['client_name'];
-                    $client_num = $_POST['client_num'];
-                    $event_id = $_POST['event_id']; //$_POST['event_id'];
-    
-                    // Validation des données
-                    if ($client_name == "" || $client_num == "" || $event_id == "") {
-                        // echo "Tous les champs sont requis.";
-                        $_SESSION['error'] =  "Tous les champs sont requis.";
-                        // exit;
-                    }
-                    
-                    $message = "Nom: $client_name; client_num: $client_num;Event number: $event_id;";
-                    // $pdo = Database::getConnection();
-                    
-    
-                    // Préparation de la requête SQL pour insérer les données
-                    // client_name	client_num	event_id	phone	message	created_at	
-    
-                    $sql = "INSERT INTO event_reservations (client_name,client_num,event_id) VALUES (?,?,?)";
-                    $stmt = $pdo->prepare($sql);
-                    // var_dump($stmt->execute(array($client_name,$client_num,$event_id,$phone,$message)));
-                    // die();
-                    $stmt->execute(array($client_name,$client_num,$event_id));
-                    // /*
-                        try {
-                            // Configuration du serveur SMTP de Gmail
-                            $mail->isSMTP();                                             // Utiliser SMTP
-                            $mail->Host       = 'smtp.googlemail.com';                        // Serveur SMTP de Gmail
-                            $mail->SMTPAuth   = true;                                    // Activer l'authentification SMTP
-                            $mail->Username   = 'degittiq229@gmail.com';               // Ton adresse Gmail
-                            $mail->Password   = 'uyflekniwkslkuwi';                    // Ton mot de passe Gmail ou mot de passe d'application (voir plus bas)
-                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;          // Activer TLS
-                            $mail->Port       = 587;                                     // Port SMTP pour TLS
-                        
-                            // Destinataires
-                            $mail->setFrom('degittiq229@gmail.com', 'CSL-KETOU');
-                            $mail->addAddress('destinataire@exemple.com', 'Nom du destinataire'); // Ajouter un destinataire
-                        
-                            // Contenu de l'email
-                            $mail->isHTML(true);                                  // Définit l'email comme au format HTML
-                            $mail->subject = 'Contact Mail from CSL-KETOU';
-                            $mail->Body    = $message;
-                            $mail->AltBody = 'Ceci est le corps du message en texte brut pour les clients mail qui n\'acceptent pas le HTML';
-                        
-                            $mail->send();
-                            // echo 'Le message a été envoyé avec succès';
-                            $_SESSION['success'] = "Votre message a été envoyé avec succès.";
-                        } catch (Exception $e) {
-                            // echo "Le message n'a pas pu être envoyé. Erreur: {$mail->ErrorInfo}";
-                            $_SESSION['error'] = "Le message n'a pas pu être envoyé. Erreur: {$mail->ErrorInfo}";
-                        }
-                    // */
-    
+        if (!empty($_POST)) {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // client_name-email-subject-phone-message
+                // var_dump($_POST);
+                $client_name = $_POST['client_name'];
+                $client_num = $_POST['client_num'];
+                $event_id = $_POST['event_id']; //$_POST['event_id'];
+
+                // Validation des données
+                if ($client_name == "" || $client_num == "" || $event_id == "") {
+                    // echo "Tous les champs sont requis.";
+                    $_SESSION['error'] =  "Tous les champs sont requis.";
+                    // exit;
                 }
+                
+                $message = "Nom: $client_name; client_num: $client_num;Event number: $event_id;";
+                // $pdo = Database::getConnection();
+                
+
+                // Préparation de la requête SQL pour insérer les données
+                // client_name	client_num	event_id	phone	message	created_at	
+
+                $sql = "INSERT INTO event_reservations (client_name,client_num,event_id) VALUES (?,?,?)";
+                $stmt = $pdo->prepare($sql);
+                // var_dump($stmt->execute(array($client_name,$client_num,$event_id,$phone,$message)));
+                // die();
+                $stmt->execute(array($client_name,$client_num,$event_id));
+                // /*
+                    try {
+                        // Configuration du serveur SMTP de Gmail
+                        $mail->isSMTP();                                             // Utiliser SMTP
+                        $mail->Host       = 'smtp.googlemail.com';                        // Serveur SMTP de Gmail
+                        $mail->SMTPAuth   = true;                                    // Activer l'authentification SMTP
+                        $mail->Username   = 'degittiq229@gmail.com';               // Ton adresse Gmail
+                        $mail->Password   = 'uyflekniwkslkuwi';                    // Ton mot de passe Gmail ou mot de passe d'application (voir plus bas)
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;          // Activer TLS
+                        $mail->Port       = 587;                                     // Port SMTP pour TLS
+                    
+                        // Destinataires
+                        $mail->setFrom('degittiq229@gmail.com', 'CSL-KETOU');
+                        $mail->addAddress('destinataire@exemple.com', 'Nom du destinataire'); // Ajouter un destinataire
+                    
+                        // Contenu de l'email
+                        $mail->isHTML(true);                                  // Définit l'email comme au format HTML
+                        $mail->subject = 'Contact Mail from CSL-KETOU';
+                        $mail->Body    = $message;
+                        $mail->AltBody = 'Ceci est le corps du message en texte brut pour les clients mail qui n\'acceptent pas le HTML';
+                    
+                        $mail->send();
+                        // echo 'Le message a été envoyé avec succès';
+                        $_SESSION['success'] = "Votre message a été envoyé avec succès.";
+                    } catch (Exception $e) {
+                        // echo "Le message n'a pas pu être envoyé. Erreur: {$mail->ErrorInfo}";
+                        $_SESSION['error'] = "Le message n'a pas pu être envoyé. Erreur: {$mail->ErrorInfo}";
+                    }
+                // */
+
             }
-        ?>
-    
-    <?php
-    
-    // Vérifier si un message est stocké dans la session success
-    if (isset($_SESSION['success'])) {  
+        }
     ?>
     
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Notification</strong>
-                <small class="text-muted">Just now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                <?= $_SESSION['success'] ?>
-            </div>
-        </div>
-    </div>
-    <?php
-    } unset($_SESSION['success']);
+    <?php        
+        // Vérifier si un message est stocké dans la session success
+        if (isset($_SESSION['success'])) {  
+            ?>
+                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                    <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <strong class="me-auto">Notification</strong>
+                            <small class="text-muted">Just now</small>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            <?= $_SESSION['success'] ?>
+                        </div>
+                    </div>
+                </div>
+            <?php
+        } unset($_SESSION['success']);
     ?>
     
     
     <?php
         // Vérifier si un message est stocké dans la session error
         if (isset($_SESSION['error'])) {  
-    ?>
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto">Notification</strong>
-                    <small class="text-muted">Just now</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            ?>
+                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                    <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <strong class="me-auto">Notification</strong>
+                            <small class="text-muted">Just now</small>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            <?= $_SESSION['error'] ?>
+                        </div>
+                    </div>
                 </div>
-                <div class="toast-body">
-                    <?= $_SESSION['error'] ?>
-                </div>
-            </div>
-        </div>
-    <?php
+            <?php
         }unset($_SESSION['error']);
     ?>
+    
     <br>
     <section id="section1" class="container-lg ccc" data-aos="zoom-in" data-aos-delay="100">
         <div class="row position">
@@ -291,10 +290,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <?php
-                            
-    $stmt = $pdo->query("SELECT * FROM founder_bio LIMIT 1");
-    $founder = $stmt->fetch(PDO::FETCH_ASSOC);
+                    <?php                                              
+                        $stmt = $pdo->query("SELECT * FROM founder_bio LIMIT 1");
+                        $founder = $stmt->fetch(PDO::FETCH_ASSOC);
                     ?>
                     <img src="image/<?= $founder['image'] ?? 'man.jpg' ?>" alt="Photo du fondateur" class="rounded-circle mb-3"
                         style="width: 200px; height: 200px; object-fit: cover;">
